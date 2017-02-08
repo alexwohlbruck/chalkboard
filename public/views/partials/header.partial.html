@@ -1,0 +1,27 @@
+<md-toolbar class="md-whiteframe-3dp fixed slide-top" ng-hide="$state.current.data.hideToolbars">
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" ng-click="$mdMedia('gt-sm') ? $state.go('home') : methods.sidenav.toggle('left', true)" ng-class="{'icon-logo-mini-sidenav': $mdMedia('gt-sm')}" aria-label="Settings">
+			<md-icon class="material-icons" md-svg-icon="{{$mdMedia('gt-sm') ? 'res/svg/the-park-icon.svg' : ''}}">{{!$mdMedia('gt-sm') ? 'menu' : ''}}</md-icon>
+		</md-button>
+		
+		<h2>
+			{{AppData.app.name}}<span ng-if="$state.current"> - {{$state.current.name | capitalize}}</span>
+		</h2>
+		
+		<span flex></span>
+		
+		<md-menu md-position-mode="target-right target" ng-show="$state.current.data.menuOptions && $state.current.data.menuOptions.length != 0">
+			<md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+				<md-icon class="material-icons">more_vert</md-icon>
+			</md-button>
+			<md-menu-content>
+				{{$state.current.data.menuOptions}}
+				<md-menu-item ng-repeat="state in $state.current.data.menuOptions">
+					<div ng-repeat="option in state">
+						<md-button ng-click="option.action()">{{option.text}}</md-button>
+					</div>
+				</md-menu-item>
+			</md-menu-content>
+		</md-menu>
+	</div>
+</md-toolbar>

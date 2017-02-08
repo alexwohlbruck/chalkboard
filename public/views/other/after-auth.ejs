@@ -1,0 +1,49 @@
+<html lang="en">  
+<head>  
+    <title>Authentication completed</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <style>
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin:  0;
+            padding: 0;
+            transform: translate(-50%, -50%);
+            font-family: Roboto, Helvetica, Arial;
+            font-size: 18px;
+            transition: ease-in-out all 300ms;
+            opacity: 0;
+        }
+        #loading.visible {
+            opacity: 1;
+        }
+    </style>
+    
+    <body>
+        <p id="loading">Loading...</p>
+    </body>
+</head>  
+<body>  
+<script type="text/javascript">
+    // There are 3 ways to get user data into the main window, each one falls back on the next
+    // 1. Send data in window.postMessage
+    // 2. Call function bound to main window called oauth.finish()
+    // 3. Simply close the window and let the app get the user data from the api
+    
+    setTimeout(function() {document.getElementById('loading').className = 'visible';}, 0);
+    
+    var status = '<%= status %>';
+    var user = <%- JSON.stringify(user) %>;
+    var handle = window.open('', 'the-park-main-window', '');
+    
+    handle.postMessage({status: status, user: user}, '*');
+    
+    setTimeout(function() {
+        handle.oauth.finish(status, user);
+        window.close();
+    }, 5);
+</script>  
+</body>  
+</html>

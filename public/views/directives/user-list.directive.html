@@ -1,0 +1,41 @@
+<div class="md-padding" layout="row">
+	<md-input-container class="margin-5-ends">
+		<label>Search</label>
+	    <input ng-model="users.search">
+	</md-input-container>
+	
+	<md-input-container class="margin-5-ends">
+		<label>Sort by</label>
+		
+		<md-select ng-model="users.orderBy">
+			<md-option value="name.first" selected>First name</md-option>
+			<md-option value="name.last">Last name</md-option>
+		</md-select>
+	</md-input-container>
+</div>
+
+<md-list>
+	<md-list-item ng-repeat="user in users | orderBy: ['-pinned', users.orderBy, users.orderby == 'name.last' ? 'name.first' : 'name.last'] | filter: criteriaMatch(users.search)" ui-sref="profile({userID: user._id})">
+		<avatar class="md-avatar" photo="user.photo" size="x-small"></avatar>
+		
+		<div class="md-list-item-text">
+			<p>{{user.name.first}} {{user.name.last}}</p>
+		</div>
+		
+		<span flex></span>
+		
+		<div ng-if="user._id != $root.authenticatedUser._id">
+		    <md-button class="md-icon-button">
+		    	<md-icon class="material-icons">chat</md-icon>
+		    	<md-tooltip md-direction="bottom">Send message</md-tooltip>
+		    </md-button>
+		    
+		    <md-button class="md-icon-button" href="mailto:{{user.email}}" target="_blank">
+		    	<md-icon class="material-icons">email</md-icon>
+		    	<md-tooltip md-direction="bottom">Send email</md-tooltip>
+		    </md-button>
+	    </div>
+		
+		<md-divider ng-if="$index != users.length - 1"></md-divider>
+	</md-list-item>
+</md-list>

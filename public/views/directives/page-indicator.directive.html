@@ -1,0 +1,13 @@
+<div layout="row" layout-align="{{controls ? 'space-between center' : 'center center'}}" flex>
+    <md-button class="md-icon-button" ng-if="controls" ng-click="pageBack()" ng-disabled="index == 0" md-ink-ripple="{{color}}">
+        <md-icon class="material-icons {{color}}-text">keyboard_arrow_left</md-icon>
+    </md-button>
+    
+    <div>
+        <span ng-repeat="page in pages" class="indicator {{color}}" ng-class="{'active': $index == index}" ng-click="goToPage($index)"></span>
+    </div>
+    
+    <md-button class="md-icon-button" ng-if="controls" ng-click="pageNext()" ng-disabled="index >= pages.length -1" md-ink-ripple="{{color}}">
+        <md-icon class="material-icons {{color}}-text">keyboard_arrow_right</md-icon>
+    </md-button>
+</div>

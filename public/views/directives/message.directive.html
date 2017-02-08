@@ -1,0 +1,16 @@
+<div layout="column" layout-align="center {{message.user._id == $root.authenticatedUser._id ? 'end' : 'start'}}">
+    <div layout="row" class="container" ng-class="{'row-reverse': message.user._id == $root.authenticatedUser._id}">
+        <avatar photo="message.user.photo" size="x-small" class="pointer" ng-class="{'hidden': !options.showAvatar}" ui-sref="profile({userID: message.user._id})"></avatar>
+        
+        <div layout="column" layout-align="start {{message.user._id == $root.authenticatedUser._id ? 'end' : 'start'}}">
+            <div class="message-bubble">
+                <span>{{message.text}}</span>
+            </div>
+            
+            <div ng-if="options.showTimestamp" class="md-body-2 margin-10-bottom ">
+                {{message.user.name.first}} -
+                <time am-time-ago="message.createdAt"></time>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div layout="row" flex class="overflow-hidden">
+    <md-card ng-hide="selectedConversation && !$mdMedia('gt-xs')" class="margin-0 relative" style="width: 350px;">
+        <md-button
+            class="md-fab md-accent md-fab-bottom-right"
+            ng-click="openCreateConversation()"
+            aria-label="New conversation">
+            
+            <md-icon class="material-icons">add</md-icon>
+        </md-button>
+        
+        <md-list>
+            <md-list-item
+                ng-repeat="conversation in conversations | orderBy: '-preview.createdAt'"
+                ng-click="openConversation($index)"
+                class="md-2-line"
+                ng-class="{'active': $index == selectedConversation.index}">
+                
+                <avatar
+                    photo="conversation.photo || conversation.participants[0].photo"
+                    class="md-avatar"
+                    size="x-small">
+                </avatar>
+                    
+                <div class="md-list-item-text">
+                    <h3>{{conversation.name || (conversation.names | enumerate)}}</h3>
+                    
+                    <p ng-show="conversation.preview">
+                        {{conversation.preview.user._id == authenticatedUser._id ? 'You' : conversation.preview.user.name.first}}:
+                        {{conversation.preview.text}}
+                    </p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card>
+    
+    <div flex layout="column" layout-align="end stretch" md-swipe-left="hideConversation()">
+        <div
+            flex layout="column"
+            layout-align="start stretch"
+            class="padding-15 overflow-scroll overflow-x-hidden"
+            scroll-glue>
+            
+            <message
+                ng-repeat="message in selectedConversation.messages"
+                message="message"
+                options="{showAvatar: selectedConversation.messages[$index - 1].user._id != message.user._id, showTimestamp: selectedConversation.messages[$index + 1].user._id != message.user._id}">
+            </message>
+        </div>
+        
+        <md-card class="margin-0" layout="column" ng-show="selectedConversation">
+            <form ng-submit="sendMessage()" layout="row" layout-align="center center">
+                <input
+                    flex type="text"
+                    ng-model="newMessage.text"
+                    placeholder="Send a message..."
+                    class="chat-input padding-20">
+                
+                <md-button class="md-icon-button" type="submit">
+                    <md-icon class="material-icons">send</md-icon>
+                </md-button>
+            </form>
+        </md-card>
+    </div>
+</div>
+
+<style>
+    .chat-input {
+        border: none;
+    }
+    .chat-input:focus {
+        outline: none;
+    }
+</style>

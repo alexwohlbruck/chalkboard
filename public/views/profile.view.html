@@ -1,0 +1,23 @@
+<div layout="row" layout-align="center start">
+	<div flex-xs="100" flex-gt-xs="90" flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50">
+		<md-card class="margin-0">
+			<jumbotron data="{title: user.name.first + ' ' + user.name.last, subtitle: '@' + user.username, cover: user.cover, photo: user.photo}" height="$mdMedia('xs') ? 250 : 350"></jumbotron>
+
+			<md-tabs class="md-tabs-center" md-dynamic-height md-border-bottom md-swipe-content="true">
+				<md-tab label="about">
+					<md-content class="md-padding" layout="column">
+						Content here
+						<md-button class="md-button-raised md-primary" ng-click="sendFriendRequest()">
+							Request friendship
+						</md-button>
+					</md-content>
+				</md-tab>
+				<md-tab label="posts">
+					<md-content class="md-padding" layout="column">
+						Content here
+					</md-content>
+				</md-tab>
+			</md-tabs>
+		</md-card>
+	</div>
+</div>

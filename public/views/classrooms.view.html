@@ -1,0 +1,13 @@
+<div layout="row" layout-align="center start">
+	<div flex-xs="100" flex-gt-xs="90" flex-gt-sm="80" flex-gt-md="70" flex-gt-lg="50">
+		<div ng-if="classrooms.teaching.length > 0">
+			<p class="md-title" ng-class="{'padding-10-sides': !$mdMedia('gt-xs')}">Owned classes</p>
+			<classrooms-list classrooms="classrooms.teaching"></classrooms-list>
+		</div>
+		
+		<div>
+			<p class="md-title" ng-class="{'padding-10-sides': !$mdMedia('gt-xs')}">Enrolled classes</p>
+			<classrooms-list classrooms="classrooms.enrolled"></classrooms-list>
+		</div>
+	</div>
+</div>

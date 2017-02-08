@@ -1,0 +1,71 @@
+<md-dialog aria-label="Welcome Dialog" id="onboarding-dialog">
+    <md-dialog-content layout="column" flex>
+        
+        <md-tabs md-selected="tabIndex" md-swipe-content="true" flex layout="column" layout-fill>
+            <md-tab ng-repeat="tab in tabs" layout="column" label="{{tab.name}}">
+                <md-tab-content flex layout-fill>
+                    <div layout="column" layout-align="space-between center" layout-fill>
+                        <div class="image" ng-style="{'background-image': 'url({{tab.imageUrl}})'}" flex layout-fill></div>
+                        <div class="md-padding" ng-if="tab.text" flex="30" layout="column" layout-align="start center">
+                            <h3 class="md-title margin-0 {{tab.textColor}}-text center-text">{{tab.title}}</h3>
+                            <p class="md-subhead margin-0 {{tab.textColor}}-text center-text">{{tab.text}}</p>
+                        </div>
+                        <div ng-if="tab.templateUrl" flex="30" layout="column" layout-align="start center">
+                            <ng-include src="tab.templateUrl"></ng-include>
+                        </div>
+                    </div>
+                </md-tab-content>
+            </md-tab>
+        </md-tabs>
+
+        
+        <div id="dialog-controls" layout="row" layout-align="space-between center">
+            <md-button class="md-fab white left control" ng-click="tabIndex = tabIndex - 1" ng-class="{'show': tabIndex != 0}" md-ink-ripple="#aaa" aria-label="Previous">
+                <md-icon class="material-icons">arrow_back</md-icon>
+            </md-button>
+            
+            <md-button class="md-fab white right control" ng-click="tabIndex = tabIndex + 1" ng-class="{'show': tabIndex != tabs.length -1}" md-ink-ripple="#aaa" aria-label="Next">
+                <md-icon class="material-icons">arrow_forward</md-icon>
+            </md-button>
+        </div>
+        
+        <page-indicator index="tabIndex" pages="tabs" color="white" controls="!$mdMedia('gt-sm')" ng-class="{'outer': $mdMedia('gt-sm')}"></page-indicator>
+    </md-dialog-content>
+</md-dialog>
+
+<style>
+    #onboarding-dialog {
+        overflow: visible;
+        width: 800px;
+        height: 500px;
+        max-width: 100%;
+        border-radius: {{$mdMedia('gt-sm') ? '15' : '0'}}px;
+        background-color: {{tabs[tabIndex].color || 'white'}};
+    }
+    #onboarding-dialog md-tabs-wrapper { display: none; }
+    #onboarding-dialog md-tabs-content-wrapper { position: static; }
+    #onboarding-dialog .image {
+        margin-top: 40px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    #dialog-controls {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    #dialog-controls .control { transform: scale(1); transition: ease-in-out all 300ms; }
+    #dialog-controls .control.left { transform: translateX(-150%) scale(0); }
+    #dialog-controls .control.right { transform: translateX(150%) scale(0); }
+    #dialog-controls .control.left.show { transform: translateX(-150%) scale(1); }
+    #dialog-controls .control.right.show { transform: translateX(150%) scale(1); }
+    #dialog-controls .control md-icon { color: {{tabs[tabIndex].color || 'black'}}; }
+    #onboarding-dialog page-indicator.outer {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, 20%);
+    }
+</style>

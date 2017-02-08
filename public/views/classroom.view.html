@@ -1,0 +1,25 @@
+<div layout="row" layout-align="center start">
+	<div flex class="margin-0">
+		<jumbotron data="jumbotronData" height="$mdMedia('xs') ? 250 : 265"></jumbotron>
+
+		<md-tabs class="md-tabs-center" md-dynamic-height md-border-bottom md-swipe-content="true">
+			<md-tab label="stream">
+				<md-content class="md-padding" layout="column">
+					Content here
+				</md-content>
+			</md-tab>
+			
+			<md-tab label="{{classroom.owner._id == $root.authenticatedUser._id ? 'students' : 'classmates'}}">
+				<md-content class="padding-0" layout="column">
+					<user-list users="studentsList"></user-list>
+				</md-content>
+			</md-tab>
+			
+			<md-tab label="about">
+				<md-content class="md-padding">
+					
+				</md-content>
+			</md-tab>
+		</md-tabs>
+	</div>
+</div>

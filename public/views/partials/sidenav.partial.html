@@ -1,0 +1,77 @@
+<md-sidenav
+		flex
+		class="md-sidenav-left slide-left"
+		md-is-locked-open="$mdMedia('gt-sm')"
+		ng-hide="$state.current.data.hideToolbars"
+		md-component-id="left"
+		ng-class="{'mini': $mdMedia('gt-sm')}"
+		md-whiteframe="4dp">
+
+	<md-toolbar class="hidden">
+		<div class="md-toolbar-tools">
+			<md-button class="md-icon-button" ng-click="methods.sidenav.toggle('left', false)">
+				<md-icon class="material-icons">menu</md-icon>
+			</md-button>
+			
+			<h2>The Park</h2>
+		</div>
+	</md-toolbar>
+	
+	<md-list>
+		<div ng-if="authenticatedUser">
+			<div ng-repeat="state in $state.get()">
+		        <md-tooltip md-direction="right">{{state.data.title}}</md-tooltip>
+					
+				<md-list-item
+					class="navigation-item"
+					ui-sref="{{state.name}}"
+					ng-click="methods.sidenav.toggle('left', false);"
+					ng-if="state.data.icon && !state.abstract"
+					ng-class="{'active': state.name == $root.$state.$current.self.name}">
+					
+					<md-icon class="material-icons">
+		          		{{state.data.icon}}
+	          		</md-icon>
+					<p class="md-bold">{{state.data.title}}</p>
+				</md-list-item>
+			</div>
+			
+			<md-divider></md-divider>
+			
+			<div>
+	          	<md-tooltip md-direction="right">Log out</md-tooltip>
+				
+				<md-list-item ng-click="AuthService.logout(); methods.sidenav.toggle('left', false);">
+					<md-icon class="material-icons">exit_to_app</md-icon>
+					<p class="md-bold">Log out</p>
+				</md-list-item>
+			</div>
+		</div>
+		
+		<div ng-if="!authenticatedUser">
+			<div>
+	          	<md-tooltip md-direction="right">Log in</md-tooltip>
+				
+				<md-list-item ng-if="!authenticatedUser" ng-click="methods.auth.openAuth($event, 'login'); methods.sidenav.toggle('left', false);">
+					<md-icon class="material-icons">face</md-icon>
+					<p class="md-bold">Log in</p>
+				</md-list-item>
+			</div>
+			
+			<div>
+	          	<md-tooltip md-direction="right">Register</md-tooltip>
+				
+				<md-list-item ng-if="!authenticatedUser" ng-click="methods.auth.openAuth($event, 'register'); methods.sidenav.toggle('left', false);">
+					<md-icon class="material-icons">assignment</md-icon>
+					<p class="md-bold">Register</p>
+				</md-list-item>
+			</div>
+		</div>
+	</md-list>
+</md-sidenav>
+
+<style>
+	md-sidenav .navigation-item.active {
+		background: rgba(0, 0, 0, );
+	}
+</style>

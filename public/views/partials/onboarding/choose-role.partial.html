@@ -1,0 +1,34 @@
+<div layout="column" layout-align="start center">
+    <p class="md-title white-text margin-0">Choose your role</p>
+
+    <form ng-submit="finishOnboarding(newRole, code)" layout="column" layout-align="start center">
+        <div layout="row" id="choose-role" class="margin-0">
+            <p class="md-subhead white-text margin-5">I am {{newRole == 'admin' ? 'an' : 'a'}} </p>
+            
+            <md-input-container class="md-block margin-0">
+                <md-select ng-model="newRole">
+                    <md-option value="student" ng-selected="true">Student</md-option>
+                    <md-option value="teacher">Teacher</md-option>
+                    <md-option value="admin">Administrator</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        
+        <div layout="row" layout-align="center start">
+            <md-input-container>
+                <label class="white-text">Enter {{newRole == 'student' ? 'class' : newRole}} code...</label>
+                <input ng-model="code" class="white-text" ng-required="newRole != 'student'">
+            </md-input-container>
+        
+            <md-button class="submit" class="md-raised margin-20" type="submit">Finish</md-button>
+        </div>
+    </form>
+</div>
+
+<style>
+    #choose-role { transform: translateX(5%); }
+    #choose-role md-select-value .md-text {
+        color: white;
+        font-weight: 500;
+    }
+</style>

@@ -1,0 +1,36 @@
+<md-card class="margin-0">
+	<md-list class="relative padding-0">
+		<md-list-item ng-repeat="classroom in classrooms | orderBy: ['period.block', 'period.ab']" class="md-2-line background-cover" ui-sref="classroom({classroomID: classroom._id})" ng-style="{'background-image': 'linear-gradient(to right, rgba(0,0,0,.6), rgba(0,0,0,0)), url({{classroom.cover}})'};" md-ink-ripple="#fff">
+			<div class="padding-15" layout="row">
+				<avatar class="md-avatar" photo="classroom.teacher.user.photo" size="x-small"></avatar>
+				<div class="md-list-item-text">
+					<h3 class="white-text md-title">{{classroom.name}}</h3>
+					<p class="white-text">{{(classroom.teacher.user.gender == 'male' ? 'Mr. ' : 'Mrs. ') + classroom.teacher.user.name.last}} - {{(classroom.period.block | ordinal) + ' block'}}{{classroom.period.ab ? (', ' + (classroom.period.ab | uppercase) + ' day') : ''}}</p>
+				</div>
+			</div>
+		</md-list-item>
+		
+		<md-list-item ng-show="classrooms.length == 0">
+		    <div class="padding-15" layout="row">
+		        <div class="md-list-item-text">
+		            <h3 class="margin-5-ends">You haven't joined any classrooms!</h3>
+		            <p class="margin-5-ends">Click on the plus button to get started</p>
+		        </div>
+		    </div>
+		</md-list-item>
+		
+		<md-menu md-position-mode="target-right target">
+			<md-button class="md-fab on-seam right" ng-click="$mdOpenMenu($event)" aria-label="Join classroom">
+	    		<md-icon class="material-icons">add</md-icon>
+	    	</md-button>
+	    	<md-menu-content>
+	    		<md-menu-item>
+	    			<md-button ng-click="openJoinClassroom($event)">Join classroom</md-button>
+	    		</md-menu-item>
+	    		<md-menu-item>
+	    			<md-button ng-click="openCreateClassroom($event)">Create classroom</md-button>
+	    		</md-menu-item>
+	    	</md-menu-content>
+    	</md-menu>
+	</md-list>
+</md-card>

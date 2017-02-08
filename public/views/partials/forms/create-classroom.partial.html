@@ -1,0 +1,69 @@
+<md-dialog aria-label="Create a classroom">
+    <form ng-submit="createClassroom()">
+        <!--name, period: {block, ab}, location: {school, classroom, number}-->
+        <md-dialog-content layout="column" class="md-dialog-content">
+            <h2 class="md-title">Create a classroom</h2>
+            
+            <md-input-container class="small-margin" ng-if="$root.classrooms.teaching.length == 0">
+                <label>Teacher Code</label>
+                <input ng-model="teacherCode.code" ng-required="true"> <!-- Why the FUCK wont this FUCKING INPUT CREATE A STRING MODEL IN THE SCOPE FML -->
+            </md-input-container>
+            
+            <md-input-container class="small-margin">
+                <label>Class name</label>
+                <input ng-model="classroom.name" ng-required="true">
+            </md-input-container>
+            
+            <md-input-container flex-gt-sm>
+                <label>School</label>
+                <md-select ng-model="classroom.location.school" ng-required="true">
+                    <md-option ng-repeat="school in schools | orderBy: name" value="{{school._id}}" ng-selected="schools.length == 1">
+                        {{school.name}} {{school.type | capitalize}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            
+            <div layout="row">
+                <md-input-container flex-gt-sm>
+                    <label>Block</label>
+                    <md-select ng-model="classroom.period.block" ng-required="true">
+                        <md-option ng-repeat="block in createBlocksArray(schools[0].periods)" value="{{block}}">
+                            {{block | ordinal}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                
+                <md-input-container flex-gt-sm>
+                    <label>A-B Schedule</label>
+                    <md-select ng-model="classroom.period.ab" ng-required="true">
+                        <md-option ng-repeat="ab in [null,'a','b']" value="{{ab}}">
+                            {{ab ? ab.toUpperCase() + ' days' : 'Every day'}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+            
+            <div layout="row">
+                <md-input-container class="small-margin" flex-gt-sm>
+                    <label>Building</label>
+                    <md-select ng-model="classroom.location.building" ng-required="true">
+                        <md-option ng-repeat="building in schools[0].buildings | orderBy: name" value="{{building._id}}">
+                            {{building.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            
+                <md-input-container class="small-margin" flex="40">
+                    <label>Room #</label>
+                    <input ng-model="classroom.location.number" type="number" min="1" ng-required="true">
+                </md-input-container>
+            </div>
+        </md-dialog-content>
+        
+        <md-dialog-actions layout="row">    
+            <span flex></span>
+            <md-button ng-click="closeDialog()">Cancel</md-button>
+            <md-button type="submit" class="md-primary">Create</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

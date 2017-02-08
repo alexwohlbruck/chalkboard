@@ -1,0 +1,36 @@
+<div class="landing-page" layout="column">
+    <div class="section-1 background-cover" layout="column" layout-align="start center">
+        <div class="padding-20" layout="column" layout-align="start center">
+            <h4 class="md-display-1 font-circular font-900 margin-0 opacity-70">{{AppData.app.name}}</h4>
+            <h1 class="md-display-{{$mdMedia('gt-sm') ? '4' : '3'}} font-circular margin-20 center-text text-shadow-3">Make learning <span class="white-text">easy.</span></h1>
+            
+            <p class="description md-title center-text white-text text-shadow-1" ng-class="{'max-width-70': $mdMedia('gt-xs')}">School is hard, we know. You’ve got to keep track of your homework, classwork, projects, clubs, and more. All this can now be peacefully managed in one, easy to use tool we call Chalkboard.</p>
+        </div>
+        
+        <div layout="row">
+            <div ng-show="authenticatedUser">
+                <md-button class="md-raised md-accent" ng-click="AuthService.logout()">Log Out</md-button>
+                <md-button class="md-raised md-accent" ui-sref="profile">Go to app</md-button>
+            </div>
+        
+            <div ng-hide="authenticatedUser">
+                <md-button class="md-raised md-accent" ng-click="AuthService.openAuthDialog($event, 'login')">Log In</md-button>
+                <md-button class="md-raised md-accent" ng-click="AuthService.openAuthDialog($event, 'register')">Register</md-button>
+            </div>
+        </div>
+    </div>
+    <div class="section-2">
+        <h4 class="md-display-1"></h4>
+    </div>
+</div>
+
+<style type="text/css">
+    ui-view {
+        margin: 0 !important;
+    }
+    .landing-page .md-display-4.font-circular { color: #2f2e33; font-size: 70pt; letter-spacing: -3px; line-height: 80px; }
+    .section-1, .section2 {
+        padding: {{$mdMedia('gt-sm') ? '25vh' : '10vh'}} 0;
+    }
+    .section-1 { background-image: url('https://i.imgur.com/VgBRN0L.jpg'); }
+</style>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 899.1 581.5" enable-background="new 0 0 899.1 581.5" xml:space="preserve">
+<g id="XMLID_1_">
+	<path id="XMLID_2_" fill="#FFFFFF" d="M680.6,300.7c0,0-143.3-122.9-284.9-3.5S291.5,581.5,291.5,581.5s-116-141.1-37.9-292.5
+		C307.2,216.2,522.2,131.1,680.6,300.7z"/>
+	<path id="XMLID_18_" fill="#FFFFFF" d="M253.5,289c-33.4,64.8-31.3,127.7-17.9,178.5c0.1-0.4,1.3-143.5,140.9-199.4
+		c120.9-48.4,241.9-18,301.5,30.5c1.7,1.4,2.7,2.2,2.7,2.2C602.4,87.7,307.2,216.2,253.5,289z"/>
+	<defs>
+		<filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="899.1" height="321.2">
+			<feFlood  style="flood-color:white;flood-opacity:1" result="back"/>
+			<feBlend  in="SourceGraphic" in2="back" mode="normal"/>
+		</filter>
+	</defs>
+	<mask maskUnits="userSpaceOnUse" x="0" y="0" width="899.1" height="321.2" id="XMLID_34_">
+		<g id="XMLID_6_" filter="url(#Adobe_OpacityMaskFilter)">
+			<path id="XMLID_7_" fill="#121212" d="M774,96.6c-1.2,3.4-1.8,7-1.8,10.7c0,11.9,6.4,22.6,16.9,30.4c1.2-3.4,1.8-7,1.8-10.7
+				C790.8,115.1,784.4,104.4,774,96.6z"/>
+		</g>
+	</mask>
+	<path id="XMLID_4_" mask="url(#XMLID_34_)" fill="#FFFFFF" d="M53.8,41.4c0,0,5.8,171.3,165.5,171.3S489.3,44.3,631.7,10
+		C768.3-22.9,849.6,32.1,899.1,81c0,0-110.1,21-72.8,139.8c0,0-70.5,55.9-89.1-10.5s-114.8-170.7-254-74.6
+		c0,0,133.9-45.9,197.5,32.3c47.6,58.5,25.4,128.8,21.9,132.8c-0.1,0.1-21.9-0.2-21.9-0.2s-50.9-102.9-245-82.6
+		c-110.3,11.6-166.3,94.2-267.1,102.4C67.7,328.6,22.3,262.8,5.4,206.3S13,68.8,53.8,41.4z"/>
+</g>
+</svg>

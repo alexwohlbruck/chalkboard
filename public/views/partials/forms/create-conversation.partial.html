@@ -1,0 +1,36 @@
+<md-dialog aria-label="New conversation" flex-gt-sm="30">
+    <form>
+        <md-dialog-content class="md-dialog-content">
+            <h2 class="md-title">New conversation</h2>
+            
+            <md-chips ng-model="participants" flex>
+                <md-autocomplete
+                    flex required
+                    md-input-minlength="1",
+                    md-input-maxlength="30"
+                    md-search-text="searchText"
+                    md-items="user in getMatches(searchText)"
+                    md-require-match
+                    md-autofocus
+                    md-autoselect
+                    placeholder="{{participants.length == 0 ? 'Name, username, or email' : ''}}">
+                    <span md-highlight-text="ctrl.searchText">{{user.name.first + ' ' + user.name.last}}</span>
+                    <md-not-found>
+                        {{searchText ? "No users found" : "Send someone a friend request to chat with them!"}}
+                    </md-not-found>
+                </md-autocomplete>
+                <md-chip-template>
+                    <strong>{{$chip.name.first + ' ' + $chip.name.last}}</strong>
+                </md-chip-template>
+            </md-chips>
+        </md-dialog-content>
+        <md-dialog-actions>
+            <md-button ng-click="closeDialog()">
+                Cancel
+            </md-button>
+            <md-button class="md-primary" ng-click="createConversation()" ng-disabled="participants.length == 0">
+                Create {{participants.length < 2 ? 'conversation' : 'group'}}
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

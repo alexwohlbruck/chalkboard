@@ -1,0 +1,19 @@
+{
+  "name": "the-park",
+  "description": "An lms that provides management for school work and assignments",
+  "main": "server.js",
+  "authors": [
+    "Alex Wohlbruck <alexwohlbruck@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-socket-io": "^0.7.0"
+  }
+}
