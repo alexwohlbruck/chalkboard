@@ -17,6 +17,7 @@
     "angular-aria": "^1.5.10",
     "angular-material": "^1.1.1",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.15.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",

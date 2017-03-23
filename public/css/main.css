@@ -39,6 +39,7 @@
 .margin-20 { margin: 20px !important; }
 
 .padding-0 { padding: 0px !important; }
+.padding-0-top { padding-top: 0px !important; }
 .padding-5 { padding: 5px !important; }
 .padding-10 { padding: 10px !important; }
 .padding-10-sides { padding: 0px 10px !important; }
@@ -47,6 +48,14 @@
 
 ui-view {
 	transition: cubic-bezier(0.43, 0.11, 0.1, 1.02) all 600ms;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+a:hover, a:active {
+	text-decoration: underline;	
 }
 
 .max-width-70 { max-width: 70% !important; }
@@ -182,6 +191,7 @@ avatar .x-small { width: 38px; height: 38px; }
 avatar .small { width: 50px; height: 50px; }
 avatar .medium { width: 100px; height: 100px; }
 avatar .large { width: 110px; height: 110px; }
+md-list-item avatar .x-small { margin: 2.5px; }
 
 page-indicator { display: block; padding: 8px; }
 page-indicator .indicator {

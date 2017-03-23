@@ -57,14 +57,12 @@ app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filte
         })
         .then(function(post) {
             PostService.createPost({
-                classroom: post.classroom,
+                classroom: $stateParams.classroomID,
                 type: type,
-                text: post.text,
-                assignment: '',
-                question: ''
+                text: post.text
+            }).then(function(response) {
+                $scope.classroom.posts.unshift(response.data);
             });
-        }, function() {
-            $scope.status = 'You cancelled the dialog.';
         });
     };
 }]);
