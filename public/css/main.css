@@ -30,6 +30,7 @@
 .fixed 	  { position: fixed; }
 
 .margin-0 { margin: 0px !important; }
+.margin-3-bottom { margin-bottom: 3px !important; }
 .margin-5 { margin: 5px !important; }
 .margin-5-ends { margin: 5px 0px !important; }
 .margin-10 { margin: 10px !important; }
@@ -191,7 +192,6 @@ avatar .x-small { width: 38px; height: 38px; }
 avatar .small { width: 50px; height: 50px; }
 avatar .medium { width: 100px; height: 100px; }
 avatar .large { width: 110px; height: 110px; }
-md-list-item avatar .x-small { margin: 2.5px; }
 
 page-indicator { display: block; padding: 8px; }
 page-indicator .indicator {
