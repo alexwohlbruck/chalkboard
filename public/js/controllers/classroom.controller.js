@@ -1,8 +1,8 @@
 /* global angular */
 var app = angular.module('chalkboard');
 
-app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filter', 'ClassroomService', 'AppMethods',
-    function($scope, $rootScope, $stateParams, $filter, ClassroomService, AppMethods) {
+app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filter', 'ClassroomService', 'AppMethods', '$mdDialog', '$mdMedia', 'PostService',
+    function($scope, $rootScope, $stateParams, $filter, ClassroomService, AppMethods, $mdDialog, $mdMedia, PostService) {
         
     ClassroomService.getClassroom($stateParams.classroomID)
         .then(function(response) {
@@ -26,4 +26,45 @@ app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filte
         }, function(err) {
             AppMethods.toast({message: err.data.message || err.statusText});
         });
+        
+    $scope.createPost = function(ev, type) {
+        $mdDialog.show({
+            controller: function($scope) {
+                $scope.ui = {};
+                $scope.post = {
+                    type: type
+                };
+                switch (type) {
+                    case 'announcement':
+                        $scope.ui.icon = 'announcement';
+                        break;
+                    case 'assignment':
+                        $scope.ui.icon = 'assignment';
+                        break;
+                    case 'question':
+                        $scope.ui.icon = 'live_help';
+                        break;
+                }
+                $scope.closeDialog = function(data) {
+                    $mdDialog.hide(data);
+                };
+            },
+            templateUrl: '/views/partials/forms/post.partial.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $mdMedia('xs')
+        })
+        .then(function(post) {
+            PostService.createPost({
+                classroom: post.classroom,
+                type: type,
+                text: post.text,
+                assignment: '',
+                question: ''
+            });
+        }, function() {
+            $scope.status = 'You cancelled the dialog.';
+        });
+    };
 }]);

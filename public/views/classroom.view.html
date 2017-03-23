@@ -23,3 +23,28 @@
 		</md-tabs>
 	</div>
 </div>
+
+<md-fab-speed-dial class="md-fab-bottom-right md-accent" md-direction="up">
+	<md-fab-trigger>
+		<md-button aria-label="menu" class="md-fab">
+			<md-icon class="material-icons">add</md-icon>
+		</md-button>
+	</md-fab-trigger>
+
+	<md-fab-actions>
+		<md-button aria-label="Ask question" class="md-fab md-raised md-mini" ng-click="createPost($event, 'question')">
+			<md-icon class="material-icons">live_help</md-icon>
+        	<md-tooltip md-direction="left">Ask question</md-tooltip>
+		</md-button>
+
+		<md-button aria-label="Post assignment" class="md-fab md-raised md-mini" ng-click="createPost($event, 'assignment')">
+			<md-icon class="material-icons">assignment</md-icon>
+        	<md-tooltip md-direction="left">Post assignment</md-tooltip>
+		</md-button>
+
+		<md-button aria-label="Post announcement" class="md-fab md-raised md-mini" ng-click="createPost($event, 'announcement')">
+			<md-icon class="material-icons">announcement</md-icon>
+        	<md-tooltip md-direction="left">Post announcement</md-tooltip>
+		</md-button>
+	</md-fab-actions>
+</md-fab-speed-dial>

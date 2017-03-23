@@ -1,4 +1,3 @@
-// Classroom routes - /api/classroom/...
 var express = require('express');
 var router = express.Router();
 var Classroom = require.main.require('./app/models/classroom');

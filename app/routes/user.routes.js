@@ -1,4 +1,3 @@
-// User routes - /api/user/...
 var express = require('express');
 var router = express.Router();
 var User = require.main.require('./app/models/user');
