@@ -64,7 +64,9 @@ app.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatService', 'ChatSocket',
     
     $scope.sendMessage = function() {
         if ($scope.newMessage) {
-            ChatSocket.emit('message:send', {text: $scope.newMessage.text});
+            var message = $scope.newMessage;
+                message.conversation = $scope.selectedConversation._id;
+            ChatSocket.emit('message:send', message);
             $scope.newMessage = null;
         }
     };
@@ -91,10 +93,13 @@ app.controller('ChatCtrl', ['$scope', '$rootScope', 'ChatService', 'ChatSocket',
                 };
                 
                 $scope.createConversation = function() {
-                    ChatService.createConversation($scope.participants)
+                    var participantIDs = $scope.participants.map(o => o._id);
+                    
+                    ChatService.createConversation(participantIDs)
                         .then(function(response) {
                             $mdDialog.hide(response.data);
                         }, function(err) {
+                            console.log(err);
                             $rootScope.toast({message: err.message || err.statusText});
                         });
                 };

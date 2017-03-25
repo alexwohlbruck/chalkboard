@@ -19,15 +19,18 @@
                         {{searchText ? "No users found" : "Send someone a friend request to chat with them!"}}
                     </md-not-found>
                 </md-autocomplete>
+                
                 <md-chip-template>
                     <strong>{{$chip.name.first + ' ' + $chip.name.last}}</strong>
                 </md-chip-template>
             </md-chips>
         </md-dialog-content>
+        
         <md-dialog-actions>
             <md-button ng-click="closeDialog()">
                 Cancel
             </md-button>
+            
             <md-button class="md-primary" ng-click="createConversation()" ng-disabled="participants.length == 0">
                 Create {{participants.length < 2 ? 'conversation' : 'group'}}
             </md-button>

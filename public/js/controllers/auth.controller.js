@@ -1,8 +1,8 @@
 /* global angular */
 var app = angular.module('chalkboard');
 
-app.controller('AuthCtrl', ['$scope', '$rootScope', '$http', '$state', 'AuthService', 'tabIndex', 'AppMethods',
-    function($scope, $rootScope, $http, $state, AuthService, tabIndex, AppMethods) {
+app.controller('AuthCtrl', ['$scope', '$rootScope', '$http', '$state', 'AuthService', 'tabIndex', 'AppMethods', 'AppData',
+    function($scope, $rootScope, $http, $state, AuthService, tabIndex, AppMethods, AppData) {
     
     var googleColors = ['#4285f4', '#ea4335', '#fbbc05', '#34a853'];
     

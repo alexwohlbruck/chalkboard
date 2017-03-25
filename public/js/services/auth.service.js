@@ -1,8 +1,8 @@
 /* global angular */
 var app = angular.module('chalkboard');
 
-app.service('AuthService', ['$rootScope', '$http', '$state', '$window', '$mdDialog', 'AppData', 'AppMethods',
-    function($rootScope, $http, $state, $window, $mdDialog, AppData, AppMethods) {
+app.service('AuthService', ['$rootScope', '$http', '$state', '$window', '$mdDialog', 'AppData', 'AppMethods', 'ChatSocket',
+    function($rootScope, $http, $state, $window, $mdDialog, AppData, AppMethods, ChatSocket) {
         
     var that = this;
     var oauthPopup;
@@ -93,11 +93,14 @@ app.service('AuthService', ['$rootScope', '$http', '$state', '$window', '$mdDial
         var promise = that.getUser();
     		promise.then(function(response) {
     		    if (response.status == 200) {
+    		      //  ChatSocket.emit('auth:login', response.data.user);
     			    $rootScope.authenticatedUser = response.data.user;
     		    } else {
+    		      //  ChatSocket.emit('auth:logout');
     		        $rootScope.authenticatedUser = null;
     		    }
     		}, function(error) {
+    		  //  ChatSocket.emit('auth:logout');
     			$rootScope.authenticatedUser = null;
     		});
         return promise;
@@ -110,6 +113,7 @@ app.service('AuthService', ['$rootScope', '$http', '$state', '$window', '$mdDial
     
     this.success = function(user) {
         $mdDialog.hide();
+    // 	ChatSocket.emit('auth:login', user);
         $rootScope.authenticatedUser = user;
         $state.go('profile');
     };

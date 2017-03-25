@@ -62,7 +62,7 @@ app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filte
                     return hours;
                 }
             }],
-            templateUrl: '/views/partials/forms/post.partial.html',
+            templateUrl: '/views/partials/forms/create-post.partial.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             clickOutsideToClose:true,

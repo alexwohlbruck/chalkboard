@@ -7,7 +7,6 @@ var User = require.main.require('./app/models/user');
 var errors = require.main.require('./config/errors');
 
 router.get('/conversations', function(req, res) {
-    req.user = {_id: '58425a38e8f02712a9df03eb'};
     if (req.user) {
         Conversation.aggregate([
             {$match: {participants: mongoose.Types.ObjectId(req.user._id)}},
@@ -61,21 +60,30 @@ router.get('/conversations/:conversationID', function(req, res) {
 
 router.post('/conversations', function(req, res) {
     if (req.user) {
-        req.body.participants.push(req.user._id);
+    console.log('1');
+        req.body.participants.push(req.user.id);
+        
+    console.log('2');
         var conversation = new Conversation({
             participants: req.body.participants
         });
+    console.log(conversation);
         
         conversation.save().then(function(conversation) {
+    console.log('4');
             return User.populate(conversation, {path: 'participants', select: 'name photo'});
         }).then(function(conversation) {
+    console.log('5');
             return res.status(200).json(conversation);
         }).catch(function(err) {
+    console.log('6');
             return res.status(400).json(err);
         });
     } else {
         return res.status(401).json({message: errors.unauthenticated});
     }
 });
+
+
 
 module.exports = router;

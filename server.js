@@ -16,9 +16,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var passportSocketIo = require('passport.socketio');
+var MongoStore = require('connect-mongo')(session);
 
 var keys = require('./config/keys'); // Secret stuff
 require('./config/passport')(passport); // Passport config
+var mongoStore = new MongoStore({url: keys.database.url});
 
 var port = process.env.PORT || 8080;
 var ip = process.env.IP || "0.0.0.0";
@@ -39,15 +42,22 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 
 // Passport config
-var sessionMiddleware = session({secret: keys.session.secret, resave: true, saveUninitialized: true});
+var sessionMiddleware = session({key: keys.session.key, secret: keys.session.secret, resave: true, saveUninitialized: true, store: mongoStore});
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session()); // Persistent login sessions
 
 // Pass authorization to socket.io middleware
-io.use(function(socket, next) {
-    sessionMiddleware(socket.request, socket.request.res, next);
-});
+// io.use(function(socket, next) {
+    // sessionMiddleware(socket.request, socket.request.res, next);
+// });
+
+io.use(passportSocketIo.authorize({
+	cookieParser: cookieParser,
+	key: keys.session.key,
+	secret: keys.session.secret,
+	store: mongoStore
+}));
 
 // Define routes
 app.use('/api', require('./app/routes'));

@@ -39,10 +39,16 @@ ConversationSchema.pre('save', function(next, done) {
             err.conversation = conversation;
             return done(err);
         } else {
-            return Message.save(new Message({
-                type: ""
-            }));
-            next();
+            // Create welcome message
+            var message = new Message({
+                type: 'new',
+                conversation: that._id,
+                text: "Beginning of chat"
+            });
+            
+            message.save().then(function() {
+                next();
+            });
         }
     }, function(err) {
         console.log(err);
@@ -50,14 +56,5 @@ ConversationSchema.pre('save', function(next, done) {
 });
 
 var Conversation = mongoose.model('Conversation', ConversationSchema);
-
-var convo = new Conversation({
-    name: "Salty Spitoon " + Math.floor(Math.random() * 1000),
-    participants: ['582c590d594e991257b648dd', '58425a38e8f02712a9df03eb']
-});
-
-convo.save(function(err, data) {
-    console.log(err, data);
-});
 
 module.exports = Conversation;
