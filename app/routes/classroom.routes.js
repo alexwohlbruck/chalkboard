@@ -124,6 +124,8 @@ router.post('/:classroomID/posts', function(req, res) {
         }, function(err) {
             return res.status(400).json(err);
         });
+    } else {
+        return res.status(401).json({message: errors.unauthenticated});
     }
 });
 

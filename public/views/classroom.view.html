@@ -27,7 +27,7 @@
 </div>
 
 <md-fab-speed-dial
-	class="md-fab-bottom-right md-accent md-scale"
+	class="md-fab-bottom-right fixed md-accent md-scale"
 	md-direction="up"
 	md-open="fabOpen"
 	ng-mouseenter="fabOpen=true"
@@ -40,7 +40,7 @@
 	</md-fab-trigger>
 
 	<md-fab-actions>
-		<md-button aria-label="Ask question" class="md-fab md-raised md-mini" ng-click="createPost($event, 'question')">
+		<md-button ng-disabled="true" aria-label="Ask question" class="md-fab md-raised md-mini" ng-click="createPost($event, 'question')">
 			<md-icon class="material-icons">live_help</md-icon>
         	<md-tooltip md-direction="left">Ask question</md-tooltip>
 		</md-button>

@@ -27,15 +27,17 @@
 
 .relative { position: relative; }
 .absolute { position: absolute; }
-.fixed 	  { position: fixed; }
+.fixed 	  { position: fixed !important; }
 
 .margin-0 { margin: 0px !important; }
+.margin-2-top { margin-top: 2px !important; }
 .margin-3-bottom { margin-bottom: 3px !important; }
 .margin-5 { margin: 5px !important; }
-.margin-5-ends { margin: 5px 0px !important; }
+.margin-5-ends { margin-top: 5px !important; margin-bottom: 5px !important; }
 .margin-10 { margin: 10px !important; }
 .margin-10-top { margin-top: 10px !important; }
 .margin-10-bottom { margin-bottom: 10px !important; }
+.margin-10-sides { margin-left: 10px !important; margin-right: 10px !important; }
 .margin-15 { margin: 15px !important; }
 .margin-20 { margin: 20px !important; }
 
@@ -127,7 +129,7 @@ md-tabs.md-tabs-center md-pagination-wrapper {
 }
 
 md-input-container.small-margin {
-    margin: 10px 0 !important;
+    margin-bottom: 10px !important;
 }
 md-input-container.small-margin .md-errors-spacer {
     min-height: 0 !important;

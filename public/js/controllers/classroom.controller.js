@@ -29,7 +29,8 @@ app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filte
         
     $scope.createPost = function(ev, type) {
         $mdDialog.show({
-            controller: function($scope) {
+            controller: ['$scope', 'ClassroomService', function($scope, ClassroomService) {
+                
                 $scope.ui = {};
                 $scope.post = {
                     type: type
@@ -45,10 +46,22 @@ app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filte
                         $scope.ui.icon = 'live_help';
                         break;
                 }
+                
+                ClassroomService.getClassrooms().then(function(response) {
+                    $scope.classrooms = response.data.teaching;
+                });
+                
                 $scope.closeDialog = function(data) {
                     $mdDialog.hide(data);
                 };
-            },
+                $scope.getNumbers = function(amount) {
+                    var hours = [];
+                    for (var i = 1; i <= amount; i++) {
+                        hours.push(i);
+                    }
+                    return hours;
+                }
+            }],
             templateUrl: '/views/partials/forms/post.partial.html',
             parent: angular.element(document.body),
             targetEvent: ev,
