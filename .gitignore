@@ -1,0 +1,17 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var mongooseDelete = require('mongoose-delete');
+
+var PostSchema = new Schema({
+    user:       {type: Schema.Types.ObjectId, ref: 'User', required: true},
+    classroom:  {type: Schema.Types.ObjectId, ref: 'Classroom', required: true},
+    text:       {type: String}
+},{
+    timestamps: true
+});
+
+PostSchema.plugin(mongooseDelete, {overrideMethods: 'all', deletedAt : true});
+
+var Post = mongoose.model('Post', PostSchema);
+
+module.exports = Post;

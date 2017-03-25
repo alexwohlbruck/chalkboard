@@ -1,0 +1,26 @@
+<md-card>
+    <md-list class="md-dense">
+        <md-list-item class="md-2-line">
+            <avatar
+                class="md-avatar pointer"
+                photo="post.user.photo"
+                size="x-small"
+                ui-sref="profile({userID: post.user._id})">
+            </avatar>
+            
+            <div class="md-list-item-text">
+                <h3 class="margin-3-bottom">
+                    <a ui-sref="profile({userID: post.user._id})">
+                        {{post.user.name.first}} {{post.user.name.last}}
+                    </a>
+                </h3>
+                
+                <p><time am-time-ago="post.createdAt"></time></p>
+            </div>
+        </md-list-item>
+    </md-list>
+    
+    <md-card-content class="padding-0-top">
+        {{post.text}}
+    </md-card-content>
+</md-card>

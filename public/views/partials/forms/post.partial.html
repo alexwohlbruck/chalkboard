@@ -1,0 +1,76 @@
+<md-dialog flex="80" flex-gt-md="50">
+    <md-toolbar class="md-hue-2">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button">
+                <md-icon class="material-icons">{{ui.icon}}</md-icon>
+            </md-button>
+        
+            <h2 flex md-truncate>Post {{post.type}}</h2>
+        
+            <md-button class="md-icon-button" aria-label="Close" ng-click="closeDialog()">
+                <md-icon class="material-icons">close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    
+    <md-dialog-content class="md-dialog-content">
+        <div layout="column">
+            <p class="md-body-2 margin-0">Details</p>
+            
+            <md-input-container class="small-margin" ng-if="post.type == 'assignment'">
+                <label>Title</label>
+                <input name="title" ng-model="post.title"/>
+            </md-input-container>
+            
+            <md-input-container class="small-margin">
+                <label>{{post.type == 'announcement' ? 'Write something' : 'Description'}}</label>
+                
+                <textarea
+                    ng-model="post.text"
+                    md-maxlength="1000"
+                    rows="1"
+                    md-select-on-focus>
+                </textarea>
+            </md-input-container>
+            
+            <div layout="column" layout-gt-sm="row">
+                <div ng-if="post.type == 'assignment'">
+                    <p class="md-body-2 margin-0">Due</p>
+                    
+                    <md-input-container class="small-margin">
+                        <label>Date</label>
+                        <md-datepicker ng-model="post.dueAt"></md-datepicker>
+                    </md-input-container>
+                    
+                    <md-input-container class="small-margin margin-10-sides" style="margin-top: 11px">
+                        <label>Time</label>
+                        <input type="time" name="time" ng-model="post.dueTime"/>
+                    </md-input-container>
+                </div>
+                
+                <div flex layout="column">
+                    <p class="md-body-2 margin-0">Pick classroom</p>
+                    
+                    <md-input-container class="small-margin" flex>
+                        <label>Classroom</label>
+                        <md-select ng-model="user.state" multiple>
+                            <md-option ng-repeat="classroom in classrooms" value="{{classroom._id}}">
+                                {{classroom.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+    
+    <md-dialog-actions layout="row" layout-align="end center">
+        <md-button ng-click="closeDialog()">
+            Cancel
+        </md-button>
+        
+        <md-button ng-click="closeDialog(post)" class="md-primary">
+            {{post.type == 'assignment' ? 'Assign' : 'Post'}}
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
