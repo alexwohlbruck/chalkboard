@@ -4,8 +4,10 @@
 
 		<md-tabs class="md-tabs-center" md-dynamic-height md-border-bottom md-swipe-content="true">
 			<md-tab label="stream">
-				<md-content class="md-padding" layout="column">
-					Content here
+				<md-content class="md-padding" layout="row" layout-align="center none">
+					<div flex-gt-xs="80" flex-gt-sm="50" layout="column" layout-align="start stretch">
+						<post ng-repeat="post in classroom.posts" post="post"></post>
+					</div>
 				</md-content>
 			</md-tab>
 			
@@ -17,9 +19,40 @@
 			
 			<md-tab label="about">
 				<md-content class="md-padding">
-					
+					{{demo.fabOpen}}
 				</md-content>
 			</md-tab>
 		</md-tabs>
 	</div>
 </div>
+
+<md-fab-speed-dial
+	class="md-fab-bottom-right fixed md-accent md-scale"
+	md-direction="up"
+	md-open="fabOpen"
+	ng-mouseenter="fabOpen=true"
+	ng-mouseleave="fabOpen=false">
+	
+	<md-fab-trigger>
+		<md-button aria-label="menu" class="md-fab">
+			<md-icon class="material-icons">add</md-icon>
+		</md-button>
+	</md-fab-trigger>
+
+	<md-fab-actions>
+		<md-button ng-disabled="true" aria-label="Ask question" class="md-fab md-raised md-mini" ng-click="createPost($event, 'question')">
+			<md-icon class="material-icons">live_help</md-icon>
+        	<md-tooltip md-direction="left">Ask question</md-tooltip>
+		</md-button>
+
+		<md-button aria-label="Post assignment" class="md-fab md-raised md-mini" ng-click="createPost($event, 'assignment')">
+			<md-icon class="material-icons">assignment</md-icon>
+        	<md-tooltip md-direction="left">Post assignment</md-tooltip>
+		</md-button>
+
+		<md-button aria-label="Post announcement" class="md-fab md-raised md-mini" ng-click="createPost($event, 'announcement')">
+			<md-icon class="material-icons">announcement</md-icon>
+        	<md-tooltip md-direction="left">Post announcement</md-tooltip>
+		</md-button>
+	</md-fab-actions>
+</md-fab-speed-dial>

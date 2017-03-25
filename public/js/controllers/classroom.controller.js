@@ -1,8 +1,8 @@
 /* global angular */
 var app = angular.module('chalkboard');
 
-app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filter', 'ClassroomService', 'AppMethods',
-    function($scope, $rootScope, $stateParams, $filter, ClassroomService, AppMethods) {
+app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filter', 'ClassroomService', 'AppMethods', '$mdDialog', '$mdMedia', 'PostService',
+    function($scope, $rootScope, $stateParams, $filter, ClassroomService, AppMethods, $mdDialog, $mdMedia, PostService) {
         
     ClassroomService.getClassroom($stateParams.classroomID)
         .then(function(response) {
@@ -26,4 +26,56 @@ app.controller('ClassroomCtrl', ['$scope', '$rootScope', '$stateParams', '$filte
         }, function(err) {
             AppMethods.toast({message: err.data.message || err.statusText});
         });
+        
+    $scope.createPost = function(ev, type) {
+        $mdDialog.show({
+            controller: ['$scope', 'ClassroomService', function($scope, ClassroomService) {
+                
+                $scope.ui = {};
+                $scope.post = {
+                    type: type
+                };
+                switch (type) {
+                    case 'announcement':
+                        $scope.ui.icon = 'announcement';
+                        break;
+                    case 'assignment':
+                        $scope.ui.icon = 'assignment';
+                        break;
+                    case 'question':
+                        $scope.ui.icon = 'live_help';
+                        break;
+                }
+                
+                ClassroomService.getClassrooms().then(function(response) {
+                    $scope.classrooms = response.data.teaching;
+                });
+                
+                $scope.closeDialog = function(data) {
+                    $mdDialog.hide(data);
+                };
+                $scope.getNumbers = function(amount) {
+                    var hours = [];
+                    for (var i = 1; i <= amount; i++) {
+                        hours.push(i);
+                    }
+                    return hours;
+                }
+            }],
+            templateUrl: '/views/partials/forms/post.partial.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            clickOutsideToClose:true,
+            fullscreen: $mdMedia('xs')
+        })
+        .then(function(post) {
+            PostService.createPost({
+                classroom: $stateParams.classroomID,
+                type: type,
+                text: post.text
+            }).then(function(response) {
+                $scope.classroom.posts.unshift(response.data);
+            });
+        });
+    };
 }]);

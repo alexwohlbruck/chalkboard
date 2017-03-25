@@ -14,13 +14,14 @@ app.config(['$mdThemingProvider', '$provide', function($mdThemingProvider) {
     });
 }]);
 
-app.run(['$rootScope', '$location', 'AuthService', '$mdToast', '$window', '$state', '$mdMedia', 'AppData',
-	function ($rootScope, $location, AuthService, $mdToast, $window, $state, $mdMedia, AppData) {
+app.run(['$rootScope', '$location', 'AuthService', '$mdToast', '$window', '$state', '$mdMedia', 'AppData', 'AppMethods',
+	function ($rootScope, $location, AuthService, $mdToast, $window, $state, $mdMedia, AppData, AppMethods) {
 		
 	$window.ga('create', 'UA-88600627-1', 'auto'); // Start Google Analytics
 	$window.name = 'the-park-main-window';
 	$rootScope.authenticatedUser = undefined;
 	
+	$rootScope.methods = AppMethods;
 	$rootScope.$state = $state;
     $rootScope.$mdMedia = $mdMedia;
     $rootScope.AuthService = AuthService;

@@ -22,7 +22,7 @@ var UserSchema = new Schema({
         password: {type: String, select: false},
     },
     google: {
-        id:     {type: String},
+        id: {type: String},
         refreshToken: {type: String}
     }
 },{
