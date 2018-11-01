@@ -6,7 +6,7 @@ Chalkboard is an online tool for school administrators, teachers, and students t
 - Assignments: Homework, quizzes, and classwork
 - Calendar: View all events, due dates, and other items in a calendar view
 
-###Technologies
+### Technologies
 - [MongoDB](https://www.mongodb.com/)
 - [Express](http://expressjs.com/)
 - [AngularJS](https://angularjs.org/)
